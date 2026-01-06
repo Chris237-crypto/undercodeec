@@ -23,7 +23,9 @@ module.exports = {
           /^show/,
           /^text-/,
           /^carousel/,
-          /^swiper-/ // si usas Swiper.js
+          /^swiper-/,
+          /^lg-/,
+          /^lightgallery/
         ],
       },
     },

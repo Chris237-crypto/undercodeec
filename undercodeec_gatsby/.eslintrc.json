@@ -3,10 +3,16 @@
   "parserOptions": {
     "requireConfigFile": false,
     "babelOptions": {
-      "presets": ["@babel/preset-react"]
+      "presets": [
+        "@babel/preset-react"
+      ]
     }
   },
-  "extends": "react-app",
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
   "rules": {
     "react/style-prop-object": "off",
     "jsx-a11y/anchor-is-valid": "off",

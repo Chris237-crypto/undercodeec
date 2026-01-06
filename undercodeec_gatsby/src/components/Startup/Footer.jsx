@@ -1,7 +1,5 @@
 import React from 'react';
-import data from 'data/Software/blog.json';
 import { Link } from 'gatsby';
-import footerData from 'data/Software/footer.json';
 
 
 const Blog = () => {

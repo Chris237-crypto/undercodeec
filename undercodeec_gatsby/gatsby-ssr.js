@@ -1,27 +1,44 @@
 import React from "react";
 
 const HtmlAttributes = {
-  lang: "en"
+  lang: "es"
 };
 
 const HeadComponents = [
   <meta key="httpEquiv" httpEquiv="X-UA-Compatible" content="IE=edge" />,
-  <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />,
-  <meta key="keywords" name="keywords" content="React Gatsby Template Iteck Multi-Purpose themeforest" />,
+  <meta key="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />,
+  <meta key="keywords" name="keywords" content="Diseño web Quito, desarrollo apps Ecuador, software a medida" />,
   <meta key="description" name="description" content="Undercodeec - Diseño & Desarrollo Web - Aplicaciones - Software a medida" />,
-  <meta key="author" name="author" content="" />,
+  <meta key="author" name="author" content="Undercodeec" />,
+  
+  // Preconnect para recursos externos (mejora tiempos de conexión)
+  <link key="preconnect-google-fonts" rel="preconnect" href="https://fonts.googleapis.com" />,
+  <link key="preconnect-google-fonts-static" rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />,
+  <link key="preconnect-facebook" rel="preconnect" href="https://connect.facebook.net" />,
+  
+  // CSS crítico - cargar normalmente (iconos y estilos principales)
   <link key="styles-bs-icons" rel="stylesheet" href="/assets/css/lib/bootstrap-icons.css" />,
   <link key="styles-fa" rel="stylesheet" href="/assets/css/lib/all.min.css" />,
-  <link key="styles-animate" rel="stylesheet" href="/assets/css/lib/animate.css" />,
+  <link key="styles-bootstrap" rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" />,
   <link key="styles-all" rel="stylesheet" href="/assets/css/style.css" />,
+  
+  // CSS no crítico - diferido
+  <link key="styles-animate" rel="stylesheet" href="/assets/css/lib/animate.css" media="print" onLoad="this.media='all'" />,
+  
+  // Favicon
   <link key="icon" rel="shortcut icon" href="/assets/img/undercode-logo.png" title="Favicon" sizes="16x16" />,
-  <link key="InterFont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" />,
+  
+  // Google Fonts con display=swap (no bloquea renderizado)
+  <link key="InterFont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />,
   <link key="MessiriFont" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&display=swap" />,
-  <script key="pace" src="/assets/js/lib/pace.js"></script>,
-  <script key="bootstrap" src="/assets/js/lib/bootstrap.bundle.min.js"></script>,
-  <script key="mixitup" src="/assets/js/lib/mixitup.min.js"></script>,
-  <script key="wow" src="/assets/js/lib/wow.min.js"></script>,
-  <script key="html5shiv" src="/assets/js/lib/html5shiv.min.js"></script>
+];
+
+// Scripts movidos al final del body para no bloquear renderizado
+const BodyComponents = [
+  <script key="pace" src="/assets/js/lib/pace.js" defer></script>,
+  <script key="bootstrap" src="/assets/js/lib/bootstrap.bundle.min.js" defer></script>,
+  <script key="mixitup" src="/assets/js/lib/mixitup.min.js" defer></script>,
+  <script key="wow" src="/assets/js/lib/wow.min.js" defer></script>,
 ];
 
 const FacebookPixel = [
@@ -53,7 +70,12 @@ const FacebookPixel = [
   </noscript>
 ];
 
-export const onRenderBody = ({ setHeadComponents, setHtmlAttributes }) => {
+export const onRenderBody = ({ 
+  setHeadComponents, 
+  setHtmlAttributes,
+  setPostBodyComponents 
+}) => {
   setHtmlAttributes(HtmlAttributes);
   setHeadComponents([...HeadComponents, ...FacebookPixel]);
+  setPostBodyComponents(BodyComponents);
 };

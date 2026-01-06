@@ -17,8 +17,8 @@ import CallToAction from 'components/Preview/CallToAction';
 //= Scripts
 import { fixPreviewStylesheetOrder } from 'common/fixStylesheetsOrder';
 
-import Seo from 'components/Seo';  // si quieres usar el componente Seo.js que hicimos
-import { Helmet } from "react-helmet"; // para usar etiqueta de search google console 
+import Seo from 'components/Seo';
+import { Helmet } from "react-helmet";
 
 
 
