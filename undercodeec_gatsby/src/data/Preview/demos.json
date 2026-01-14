@@ -1,5 +1,26 @@
 [
   {
+    "link": "https://gunsmithsec.com/",
+    "img": "/landing-preview/img/demos/gunsmit.webp",
+    "title": "Página Personalizada",
+    "type": "Gunsmiths",
+    "isNew": true
+  },
+  {
+    "link": "https://lucavvapes.com/",
+    "img": "/landing-preview/img/demos/lucanvape.webp",
+    "title": "Página Personalizada",
+    "type": "Lucavvapes",
+    "isNew": true
+  },
+  {
+    "link": "https://juliojaramilloec.com/",
+    "img": "/landing-preview/img/demos/juliojaramillo.webp",
+    "title": "Página Personalizada",
+    "type": "Julio Jaramillo",
+    "isNew": true
+  },
+  {
     "link": "https://techco.ec/",
     "img": "/landing-preview/img/demos/1.1.webp",
     "title": "Páginas  Informativa",
@@ -44,7 +65,6 @@
     "title": "Páginas  Informativa",
     "type": "art2000deco",
     "isNew": true
-
   },
   {
     "link": "https://zerdoquito.com/",
@@ -76,5 +96,4 @@
     "title": "Páginas  Informativa",
     "type": "Multiconec"
   }
-  
 ]

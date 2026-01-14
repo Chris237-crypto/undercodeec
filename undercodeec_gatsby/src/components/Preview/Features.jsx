@@ -9,7 +9,7 @@ const Features = () => {
           {
             features.map((feature, i) => (
               <div className="col-lg-4" key={i}>
-                <div className="item d-flex text-white">
+                <div className="item d-flex text-white animate-fadeUp" style={{ transitionDelay: `${i * 150}ms` }}>
                   <div className="icon">
                     <span className="d-flex align-items-center justify-content-center">
                       <i className={feature.icon}></i>

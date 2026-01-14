@@ -8,7 +8,7 @@ const FAQ = ({ rtl }) => {
   return (
     <section className="faq section-padding style-4 pt-50" data-scroll-index="7">
       <div className="container">
-        <div className="section-head text-center style-4">
+        <div className="section-head text-center style-4 animate-fadeUp">
           <h2 className="mb-30">{ rtl ? 'بحاجة إلى' : 'Tienes' } <span>{ rtl ? 'دعم ؟' : 'Preguntas?' }</span> </h2>
         </div>
         <div className="content">

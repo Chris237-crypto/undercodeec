@@ -75,6 +75,7 @@ export const Head = () => {
       <link rel="stylesheet" href="/assets/css/lib/bootstrap.min.css" />
       <link rel="stylesheet" href="/assets/css/style.css" />
       <link rel="stylesheet" href="/landing-preview/css/preview-style.css" />
+      <link rel="stylesheet" href="/assets/css/animations.css" />
     </>
   );
 };

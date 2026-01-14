@@ -27,7 +27,7 @@ const Demos = () => {
       <div className="container-xxl">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-10">
-            <div className="sec-head text-center mb-40">
+            <div className="sec-head text-center mb-40 animate-fadeUp">
               <h2 className="num">
                 <span className="color-grd">
                   PORTAFOLIO<span className="thin"></span>
@@ -47,21 +47,15 @@ const Demos = () => {
             {demos.map((demo, i) => (
               <div className="col-lg-4 col-md-6" key={i}>
                 <div
-                  className={`item ${demo.isNew ? 'item_ribbon green' : ''} ${
+                  className={`item animate-scaleUp hover-lift ${demo.isNew ? 'item_ribbon green' : ''} ${
                     demo.isComingSoon || demo.isArrived
                       ? 'item_ribbon orange'
                       : ''
                   } ${demo.isFeatured ? 'item_ribbon red' : ''}`}
+                  style={{ transitionDelay: `${(r * 3 + i) * 200}ms` }}
                 >
                   <Link to={`${demo.link}`} target="_blank">
-                    <div
-                      className={`img 
-                      
-                      
-                      
-                      `}
-                    >
-                      {/* ${demo.isUpcoming ? ' blur_img' : ''} */}
+                    <div className="img">
                       <img src={demo.img} alt="" />
                     </div>
                     <div className="info">
@@ -93,3 +87,4 @@ const Demos = () => {
 };
 
 export default Demos;
+

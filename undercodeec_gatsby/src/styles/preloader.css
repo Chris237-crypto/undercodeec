@@ -75,19 +75,19 @@
 
 #preloader.isdone {
   visibility: hidden;
-  -webkit-transition-delay: 1.5s;
-  -o-transition-delay: 1.5s;
-  transition-delay: 1.5s; }
+  -webkit-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+  transition-delay: 0.5s; }
 
 #preloader.isdone:after,
 #preloader.isdone:before {
   height: 0;
-  -webkit-transition: all 0.7s cubic-bezier(1, 0, 0.55, 1);
-  -o-transition: all 0.7s cubic-bezier(1, 0, 0.55, 1);
-  transition: all 0.7s cubic-bezier(1, 0, 0.55, 1);
-  -webkit-transition-delay: 1s;
-  -o-transition-delay: 1s;
-  transition-delay: 1s; }
+  -webkit-transition: all 0.4s cubic-bezier(1, 0, 0.55, 1);
+  -o-transition: all 0.4s cubic-bezier(1, 0, 0.55, 1);
+  transition: all 0.4s cubic-bezier(1, 0, 0.55, 1);
+  -webkit-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  transition-delay: 0.3s; }
 
 .loading {
   position: fixed;

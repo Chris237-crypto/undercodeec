@@ -6,7 +6,7 @@ const Blog = () => {
   return (
     <section className="chat-banner style-3 section-padding">
       <div className="container">
-        <div className="row align-items-center">
+        <div className="row align-items-center animate-fadeUp">
           <div className="col-lg-7">
             <div className="info">
               <h3>Creando Soluciones Digitales:
@@ -19,14 +19,14 @@ const Blog = () => {
                 href="https://wa.me/593979046329?text=Gracias%20por%20contactarte%20con%20UndercodeEC%2C%20dime%20en%20qu%C3%A9%20podemos%20ayudarte%3A%0A%0A1.%20Quiero%20saber%20m%C3%A1s%20sobre%20p%C3%A1ginas%20web%0A2.%20Quiero%20cotizar%20un%20proyecto.%0A3.%20Quiero%20ver%20portafolio%20de%20trabajos%20web%0A4.%20Quiero%20ver%20portafolio%20de%20trabajos%20App%C2%B4s%0A5.%20Quiero%20hablar%20con%20un%20asesor."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn rounded-pill bg-white border-1 border-white text-dark sm-butn me-2"
+                className="btn rounded-pill bg-white border-1 border-white text-dark sm-butn me-2 hover-lift"
               >
                 <span>Chat Whatsapp</span>
               </a>
 
               <Link
                 to="/contacto"
-                className="btn rounded-pill border-1 border-white text-white sm-butn"
+                className="btn rounded-pill border-1 border-white text-white sm-butn hover-lift"
               >
                 <span>Información</span>
               </Link>

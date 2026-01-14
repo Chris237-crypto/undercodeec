@@ -7,7 +7,7 @@ const Portfolio = () => {
       <div className="container-fluid">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-10">
-            <div className="sec-head text-center mb-80">
+            <div className="sec-head text-center mb-80 animate-fadeUp">
               <h3 className="num"><span className="gr">100<span className="thin">+</span></span></h3>
               <h2>Diseños perfectos para tu proyecto. Desde sitios web corporativos hasta tiendas en línea, nuestras plantillas lo tienen todo.</h2>
             </div>

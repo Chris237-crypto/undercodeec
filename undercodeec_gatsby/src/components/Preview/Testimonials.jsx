@@ -14,7 +14,7 @@ const Testimonials = () => {
       <div className="container-xxl">
         <div className="row justify-content-center">
           <div className="col-lg-6 col-md-10">
-            <div className="sec-head text-center mb-80">
+            <div className="sec-head text-center mb-80 animate-fadeUp">
               <h2 className="color-000 text-capitalize">
                 Personas reales, historias reales.<br /> Escucha a
                 nuestra comunidad.</h2>

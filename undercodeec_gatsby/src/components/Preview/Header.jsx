@@ -31,7 +31,7 @@ const Header = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-7">
-            <div className="cont text-center">
+            <div className="cont text-center animate-fadeUp animate-visible">
               {/* 
                 <div className="coming">
                   <h6 className="sub-title text-uppercase color-darkBlue mb-20 fs-14px ltspc-2 fw-bold">Next demos will arrive in:</h6>

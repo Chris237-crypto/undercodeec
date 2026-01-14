@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { Script } from "gatsby";
 //= Scripts
 import navbarScrollEffect from "common/navbarScrollEffect";
+import initScrollAnimations from "common/initScrollAnimations";
 //= Components
 import PreLoader from "components/PreLoader";
 import ScrollToTop from "components/ScrollToTop";
@@ -18,6 +19,11 @@ const PreviewLayout = ({ children }) => {
   useEffect(() => {
     navbarScrollEffect(navbarRef.current);
   }, [navbarRef]);
+
+  // Inicializar animaciones de scroll
+  useEffect(() => {
+    initScrollAnimations();
+  }, []);
 
   return (
     <>
