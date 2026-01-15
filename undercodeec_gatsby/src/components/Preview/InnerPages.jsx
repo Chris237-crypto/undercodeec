@@ -1,34 +1,108 @@
-import React, { useState, useEffect, useRef } from 'react'; // agregar useRef
-import { FaTag, FaCreditCard, FaExchangeAlt } from 'react-icons/fa'; import ReactGA from 'react-ga4';
+import React, { useState, useEffect, useRef } from 'react';
+import { FaCreditCard, FaExchangeAlt } from 'react-icons/fa';
+import ReactGA from 'react-ga4';
 import ReCAPTCHA from 'react-google-recaptcha';
 
+// SVG Icons for project types
+const icons = {
+  // Sitio Web - Navegador/Monitor
+  sitioWeb: (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+      <line x1="8" y1="21" x2="16" y2="21"/>
+      <line x1="12" y1="17" x2="12" y2="21"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+  ),
+  // Desarrollo de Software - Código
+  software: (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="16 18 22 12 16 6"/>
+      <polyline points="8 6 2 12 8 18"/>
+      <line x1="14" y1="4" x2="10" y2="20"/>
+    </svg>
+  ),
+  // Tienda Online - Carrito de compras
+  ecommerce: (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="9" cy="21" r="1"/>
+      <circle cx="20" cy="21" r="1"/>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+    </svg>
+  ),
+  // Landing Page - Página con cohete
+  landingPage: (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <path d="M12 11l-2 2 2 2 2-2-2-2z"/>
+      <line x1="12" y1="15" x2="12" y2="18"/>
+    </svg>
+  ),
+  // Aplicación Web - Grid/Dashboard
+  webApp: (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <rect x="3" y="3" width="7" height="7" rx="1"/>
+      <rect x="14" y="3" width="7" height="7" rx="1"/>
+      <rect x="14" y="14" width="7" height="7" rx="1"/>
+      <rect x="3" y="14" width="7" height="7" rx="1"/>
+    </svg>
+  ),
+  // Aplicación Móvil - Smartphone
+  mobileApp: (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+      <line x1="12" y1="18" x2="12" y2="18"/>
+      <circle cx="12" cy="18" r="1"/>
+    </svg>
+  ),
+  // Plataforma Moodle - Sombrero de graduación/educación
+  moodle: (
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 10l-10-5L2 10l10 5 10-5z"/>
+      <path d="M6 12v5c0 2 3 4 6 4s6-2 6-4v-5"/>
+      <line x1="22" y1="10" x2="22" y2="16"/>
+    </svg>
+  )
+};
+
+// Steps for the sidebar
+const wizardSteps = [
+  { number: 1, title: 'Tipo de proyecto', subtitle: '¿Qué tipo de proyecto deseas?' },
+  { number: 2, title: 'Información del negocio', subtitle: 'Cuéntanos sobre tu negocio' },
+  { number: 3, title: 'Características web', subtitle: '¿Qué funcionalidades deseas?' },
+  { number: 4, title: 'Automatizaciones', subtitle: 'Especifica tus integraciones' },
+  { number: 5, title: 'Presupuesto y pago', subtitle: '¿Cuál es tu presupuesto?' },
+  { number: 6, title: 'Información adicional', subtitle: '¿Algo más que debamos saber?' },
+  { number: 7, title: 'Datos de contacto', subtitle: '¿Cómo te contactamos?' }
+];
 
 const AffiliationSection = () => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-
   const [showBankDetails, setShowBankDetails] = useState(false);
-
-  const [selectedPlan, setSelectedPlan] = useState('Landing Page');
+  const [selectedPlan, setSelectedPlan] = useState('Sitio Web');
   const [loading, setLoading] = useState(false);
-
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const recaptchaRef = useRef(null);
-
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [showError, setShowError] = useState(false);
-
-
   const [selectedSubPlan, setSelectedSubPlan] = useState('Web estándar');
+  const [currentStep, setCurrentStep] = useState(1);
+
+  // Project types mapping con iconos
+  const projectTypes = [
+    { id: 'Sitio Web', name: 'Sitio Web', icon: icons.sitioWeb },
+    { id: 'Desarrollo de Software', name: 'Desarrollo de Software', icon: icons.software },
+    { id: 'Tienda Online', name: 'Tienda Online', icon: icons.ecommerce },
+    { id: 'Landing Page', name: 'Landing Page', icon: icons.landingPage },
+    { id: 'Aplicación Web', name: 'Aplicación Web', icon: icons.webApp },
+    { id: 'Aplicación Movil', name: 'Aplicación Móvil', icon: icons.mobileApp },
+    { id: 'Plataforma de cursos Moodle', name: 'Plataforma Moodle', icon: icons.moodle }
+  ];
 
   const handlePlanChange = (plan) => {
     setSelectedPlan(plan);
-    setSelectedSubPlan('Web estándar'); // ← Selecciona siempre este subplan por defecto
-  };
-
-
-  const handleFormToggle = (e) => {
-    e.preventDefault();
-    setShowForm(!showForm);
+    setSelectedSubPlan('Web estándar');
   };
 
   const handleInputChange = (e) => {
@@ -56,12 +130,10 @@ const AffiliationSection = () => {
       });
 
       if (response.ok) {
-        // Fuerza la actualización del estado
-        setFormSubmitted(false); // Reset primero
-        await new Promise(resolve => setTimeout(resolve, 50)); // Pequeño delay
+        setFormSubmitted(false);
+        await new Promise(resolve => setTimeout(resolve, 50));
         setFormSubmitted(true);
 
-        // Limpia el formulario
         setFormData({ nombre: '', email: '', telefono: '', mensaje: '' });
         setRecaptchaToken('');
         if (recaptchaRef.current) recaptchaRef.current.reset();
@@ -70,8 +142,7 @@ const AffiliationSection = () => {
         setShowForm(false);
         setShowSuccessAlert(true);
 
-        // Ahora llama a handlePayment
-        await handlePayment(true); // Pasamos true directamente
+        await handlePayment(true);
       } else {
         alert('Error al enviar la información.');
       }
@@ -82,9 +153,6 @@ const AffiliationSection = () => {
       setLoading(false);
     }
   };
-  // Agrega este componente de alerta en tu JSX (puedes estilarlo como prefieras)
-
-
 
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -93,7 +161,7 @@ const AffiliationSection = () => {
     telefono: '',
     mensaje: '',
   });
-  // Agrega este useEffect aquí
+
   useEffect(() => {
     if (
       formData.nombre ||
@@ -105,14 +173,7 @@ const AffiliationSection = () => {
     }
   }, [formData]);
 
-  useEffect(() => {
-    console.log('Estado formSubmitted cambió:', formSubmitted);
-  }, [formSubmitted]);
-
-  useEffect(() => {
-    console.log('Estado loading cambió:', loading);
-  }, [loading]);
-
+  // Plan details - mantener lógica para uso futuro
   const planDetails = {
     'Landing Page': {
       subPlans: {
@@ -159,8 +220,6 @@ const AffiliationSection = () => {
             'Inicio, servicios, nosotros, contacto',
             'SEO basico (busquedas en Google palabra unica)',
             'Diseño estandar',
-            'SEO basico (busquedas en Google palabra unica)',
-
           ],
           features2: [
             'Google Analytics integrado',
@@ -268,14 +327,35 @@ const AffiliationSection = () => {
         }
       }
     },
+    'Otro': {
+      subPlans: {
+        'Proyecto personalizado': {
+          price: 'Cotizar',
+          features1: [
+            'Consultoría personalizada',
+            'Análisis de requerimientos',
+            'Propuesta a medida',
+            'Presupuesto detallado',
+          ],
+          features2: [
+            'Desarrollo a la medida',
+            'Soporte técnico incluido',
+            'Integraciones especiales',
+            'Escalabilidad garantizada',
+          ],
+        }
+      }
+    }
   };
+
+  // Mantener lógica de pago para uso futuro (sin botones visibles)
   const handlePayment = async (isFormSubmitted = formSubmitted) => {
     console.log('Iniciando handlePayment - formSubmitted:', isFormSubmitted);
 
     if (!isFormSubmitted) {
       console.warn('Payment bloqueado: formulario no enviado');
       setShowForm(true);
-      setShowBankDetails(false); // Asegura que los datos bancarios estén ocultos
+      setShowBankDetails(false);
       setShowError(true);
       return;
     }
@@ -283,7 +363,9 @@ const AffiliationSection = () => {
     setLoading(true);
     try {
       const plan = planDetails[selectedPlan];
-      const amount = parseFloat(plan.price.replace('$', '').replace(',', ''));
+      const currentSubPlan = plan.subPlans[selectedSubPlan];
+      const priceStr = currentSubPlan ? currentSubPlan.price : '$0';
+      const amount = parseFloat(priceStr.replace('$', '').replace(',', ''));
 
       console.log('Enviando solicitud de pago para:', selectedPlan, amount);
 
@@ -293,7 +375,7 @@ const AffiliationSection = () => {
         body: JSON.stringify({
           amount,
           planName: selectedPlan,
-          customerEmail: formData.email // Asegúrate de que la API reciba el email
+          customerEmail: formData.email
         }),
       });
 
@@ -311,7 +393,7 @@ const AffiliationSection = () => {
             alert('Por favor permite ventanas emergentes para completar el pago');
             window.location.href = data.paymentUrl;
           }
-        }, 2000); // espera 0.5 segundos
+        }, 2000);
       } else {
         throw new Error('No se recibió URL de pago');
       }
@@ -324,285 +406,119 @@ const AffiliationSection = () => {
     }
   };
 
-  return (
-    <section id="planes" className="affiliation-section">
-      <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-lg-6 col-md-10">
-            <div className="sec-head text-center mb-40">
-              <h2 className="num">
-                <span className="color-grd">
-                  PLAN DE PRECIOS<span className="thin"></span>
-                </span>
-              </h2>
-              <h3 className="text-capitalize fs-1">Elija el plan adecuado para usted.</h3>
-            </div>
-          </div>
-        </div>
+  const handleProjectSelect = (projectId) => {
+    const matchingPlan = Object.keys(planDetails).find(key => key === projectId);
+    if (matchingPlan) {
+      handlePlanChange(matchingPlan);
+      const firstSubPlan = Object.keys(planDetails[matchingPlan].subPlans)[0];
+      setSelectedSubPlan(firstSubPlan);
+    }
 
-        <div className="row custom-columns">
-          {/* Columna izquierda */}
-          <div className="custom-left-column">
-            <div className="left-column">
+    ReactGA.event({
+      category: 'Planes',
+      action: 'click_tipo_proyecto',
+      label: projectId,
+    });
+
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('trackCustom', 'SeleccionarTipoProyecto', {
+        tipo: projectId,
+      });
+    }
+  };
+
+  return (
+    <section id="planes" className="wizard-section">
+      <div className="container">
+        <div className="section-head text-center mb-60">
+          <h6 className="sub-head">
+            <span className="fz-12">PLAN DE PRECIOS</span>
+          </h6>
+          <h2>Elija el plan adecuado para usted.</h2>
+        </div>
+        <div className="plans-two-columns">
+          {/* COLUMNA IZQUIERDA - Agendar Reunión */}
+          <div className="schedule-column">
+            <div className="schedule-card">
               <h2>Únase a Undercodeec</h2>
-              <p>Programa una visita guiada rápida de 15 minutos y uno de nuestros asesores te atendera.</p>
-              <img src="/landing-preview/img/img-call.png" alt="Visita Guiada" className="img-fluid" />
+              <p>Programa una visita guiada rápida de 15 minutos y uno de nuestros asesores te atenderá.</p>
+              <img src="/landing-preview/img/img-call.png" alt="Visita Guiada" className="schedule-img" />
               <button
-                className="btn btn-primary"
+                className="btn-schedule"
                 onClick={() => {
                   ReactGA.event({
                     category: 'Interacción',
                     action: 'click_reserva_llamada',
                     label: 'Botón Reserva una llamada introductoria',
                   });
-                  // Meta Pixel
-                  window.fbq('trackCustom', 'ClickReservaLlamada', {
-                    source: 'AffiliationSection',
-                  });
+                  if (typeof window !== 'undefined' && window.fbq) {
+                    window.fbq('trackCustom', 'ClickReservaLlamada', {
+                      source: 'AffiliationSection',
+                    });
+                  }
                 }}
               >
                 <a href="#reserva_agenda" className="button-reservation">
                   Reserva una llamada introductoria de 15 minutos
                 </a>
               </button>
-
             </div>
           </div>
 
-          {/* Columna derecha */}
-          <div className="custom-right-column">
-            <div className="right-column">
-              <h3>Planes Web</h3>
+          {/* COLUMNA DERECHA - Wizard de Tarjetas */}
+          <div className="wizard-column">
+            <div className="wizard-content">
+              <h2>¿Qué tipo de proyecto planificas?</h2>
+              <p className="wizard-subtitle">
+                Ayúdanos a entender las necesidades de tu proyecto seleccionando el tipo principal de sitio web que deseas construir.
+              </p>
 
-              <div className="plan-toggle d-flex flex-wrap gap-2 mb-3">
-                {Object.keys(planDetails).map((plan) => (
-                  <button
-                    key={plan}
-                    className={`btn ${selectedPlan === plan ? 'btn-active' : 'btn-inactive'}`}
-                    onClick={() => {
-                      ReactGA.event({
-                        category: 'Planes',
-                        action: 'click_plan',
-                        label: plan,
-                      });
-
-                      // Meta Pixel
-                      window.fbq('trackCustom', 'SeleccionarPlan', {
-                        plan: plan,
-                      });
-
-                      handlePlanChange(plan);
-                      const firstSubPlan = planDetails[plan]?.subPlans
-                        ? Object.keys(planDetails[plan].subPlans)[0]
-                        : null;
-                      setSelectedSubPlan(firstSubPlan);
-                    }}
-
+              {/* Project Type Cards */}
+              <div className="project-cards-grid">
+                {projectTypes.map((project, index) => (
+                  <div
+                    key={index}
+                    className={`project-card ${selectedPlan === project.id ? 'active' : ''}`}
+                    onClick={() => handleProjectSelect(project.id)}
                   >
-                    {plan}
-                  </button>
+                    <div className="project-card-icon">
+                      {project.icon}
+                    </div>
+                    <h4>{project.name}</h4>
+                  </div>
                 ))}
               </div>
 
-              {planDetails[selectedPlan]?.subPlans && (
-                <div className="subplan-toggle d-flex justify-content-center gap-2 mb-3">
-                  {Object.keys(planDetails[selectedPlan].subPlans).map((subPlan) => (
-                    <button
-                      key={subPlan}
-                      className={`btn ${selectedSubPlan === subPlan ? 'btn-active' : 'btn-inactive'}`}
-                      onClick={() => setSelectedSubPlan(subPlan)}
-                    >
-                      {subPlan}
-                    </button>
-                  ))}
-                </div>
-              )}
-
-              <p>Dos pagos mensuales de</p>
-              <div className="pricing d-flex align-items-center gap-2 mb-2">
-                <FaTag size={28} style={{ color: '#fdb800' }} />
-                <h4 className="mb-0">
-                  {planDetails[selectedPlan].subPlans
-                    ? planDetails[selectedPlan].subPlans[selectedSubPlan].price
-                    : planDetails[selectedPlan].price}
-                </h4>
-              </div>
-
-
-              {planDetails[selectedPlan]?.subPlans && planDetails[selectedPlan].subPlans[selectedSubPlan] && (
-                <div className="row">
-                  <div className="col-md-6">
-                    <ul className="features-list">
-                      {planDetails[selectedPlan].subPlans[selectedSubPlan].features1.map((feature, index) => (
-                        <li key={`col1-${index}`}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="col-md-6">
-                    <ul className="features-list">
-                      {planDetails[selectedPlan].subPlans[selectedSubPlan].features2.map((feature, index) => (
-                        <li key={`col2-${index}`}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              )}
-
-
-              {showSuccessAlert && (
-                <div className="alert alert-success mb-3" role="alert">
-                  ¡Información enviada con éxito! Estamos generando tu link de pago...
-                  <button
-                    type="button"
-                    className="close"
-                    onClick={() => setShowSuccessAlert(false)}
-                    style={{ background: 'none', border: 'none', fontSize: '1.5rem', marginLeft: '10px' }}
-                  >
-                    &times;
-                  </button>
-                </div>
-              )}
-
-              <div className="button-group">
-                {showError && (
-                  <div className="alert alert-warning" role="alert">
-                    Debes llenar y enviar los datos de facturación antes de continuar con el pago.
-                  </div>
-                )}
-
-                <button
-                  className="btn btn-primary"
-                  onClick={() => {
-                    ReactGA.event({
-                      category: 'Interacción',
-                      action: 'click_empezar',
-                      label: 'Botón Empezar',
-                    });
-                    window.fbq('trackCustom', 'ClickEmpezarPago', {
-                      plan: selectedPlan,
-                    });
-                    setShowBankDetails(false); // Oculta datos bancarios
-                    handlePayment();
-                  }}
-                  disabled={loading}
-                >
-                  <FaCreditCard className="icon-card-pulse" /> {/* ¡Clase actualizada aquí! */}
-                  {loading ? 'Procesando...' : 'PAGAR CON TARJETA'}
+              {/* Navigation Buttons */}
+              <div className="wizard-nav">
+                <button className="btn-back" onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="19" y1="12" x2="5" y2="12"/>
+                    <polyline points="12 19 5 12 12 5"/>
+                  </svg>
                 </button>
-
-                <a
-                  href="#reserva"
-                  className={`btn-link ${showError ? 'text-danger' : ''} d-flex align-items-center gap-2`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowBankDetails(!showBankDetails);
-                    setShowForm(false); // Asegura que el formulario esté oculto
-                  }}
-                  style={{ cursor: 'pointer' }}
-                >
-                  <FaExchangeAlt />
-                  {showBankDetails ? 'Ocultar datos de transferencia ↑' : 'PAGAR CON TRANSFERENCIA ↓'}
-                </a>
-
+                <button className="btn-next-step" onClick={() => setCurrentStep(Math.min(7, currentStep + 1))}>
+                  Siguiente paso
+                </button>
               </div>
-              {showForm && (
-                <>
-                  <form className="mt-3" onSubmit={handleSubmit} style={{ maxWidth: '500px' }}>
-                    <div className="mb-2">
-                      <input
-                        type="text"
-                        name="nombre"
-                        placeholder="Tu nombre"
-                        value={formData.nombre}
-                        onChange={handleInputChange}
-                        className="form-control"
-                        required
-                      />
+            </div>
+
+            {/* Sidebar with Steps */}
+            <div className="wizard-sidebar-inline">
+              <ul className="step-list">
+                {wizardSteps.map((step) => (
+                  <li
+                    key={step.number}
+                    className={`step-item ${currentStep === step.number ? 'active' : ''} ${currentStep > step.number ? 'completed' : ''}`}
+                  >
+                    <div className="step-number">{step.number}</div>
+                    <div className="step-content">
+                      <h5>{step.title}</h5>
+                      <p>{step.subtitle}</p>
                     </div>
-                    <div className="mb-2">
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Tu correo"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="form-control"
-                        required
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <input
-                        type="tel"
-                        name="telefono"
-                        placeholder="Tu número de teléfono"
-                        value={formData.telefono}
-                        onChange={handleInputChange}
-                        className="form-control"
-                      />
-                    </div>
-                    <div className="mb-2">
-                      <textarea
-                        name="mensaje"
-                        placeholder="Mensaje opcional"
-                        value={formData.mensaje}
-                        onChange={handleInputChange}
-                        className="form-control"
-                        rows="3"
-                      ></textarea>
-                    </div>
-
-                    <ReCAPTCHA
-                      sitekey="6Lf_OSsrAAAAAORgEcrisGsaYvGk1CtX2sPD24Fr"
-                      onChange={(token) => setRecaptchaToken(token)}
-                      theme="light"
-                      ref={recaptchaRef}
-                    />
-
-                    <button
-                      type="submit"
-                      className="btn btn-success"
-                      onClick={() => {
-                        ReactGA.event({
-                          category: 'Interacción',
-                          action: 'click_enviar',
-                          label: 'Botón Enviar Formulario',
-                        });
-
-                        // Meta Pixel
-                        window.fbq('trackCustom', 'EnviarFormulario', {
-                          nombre: formData.nombre,
-                          email: formData.email,
-                        });
-                      }}
-                    >
-                      Enviar
-                    </button>
-                  </form>
-
-
-                </>
-              )}
-              {/* Datos bancarios - ahora independiente del formulario */}
-              {showBankDetails && (
-                <div className="mt-4 p-3 border rounded bg-light">
-                  <p className="fw-bold mb-2">
-                    Si lo prefieres, puedes realizar el pago por transferencia bancaria a la siguiente cuenta:
-                  </p>
-                  <ul className="list-unstyled mb-0">
-                    <li><strong>Banco:</strong> Pichincha</li>
-                    <li><strong>Nombres:</strong> Christopher Alexander Gallardo Campos</li>
-                    <li><strong>Cédula:</strong> 1727155671</li>
-                    <li><strong>N° de cuenta:</strong> 2212385867</li>
-                    <li><strong>Tipo de cuenta:</strong> Ahorros</li>
-                    <li><strong>Celular:</strong> 0979046329</li>
-                  </ul>
-                  <p className="fw-bold mb-2 mt-2">
-                    Por favor enviar el comprobante al WhatsApp: 0979046329
-                  </p>
-                </div>
-              )}
-
-
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>

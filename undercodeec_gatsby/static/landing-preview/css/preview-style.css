@@ -1818,3 +1818,741 @@ header #js-scene2 {
 
  
 }
+
+/* ====================== [ Wizard Plans Section Styles ] ====================== */
+.wizard-section {
+  background: #ffffff;
+  padding: 80px 0;
+  position: relative;
+}
+
+.wizard-section .section-head h6 {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(to right, #600b56 0%, #270f31 30%, #270f31 30%, #efa238 73%, #efa238 100%);
+  font-size: 70px;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+}
+
+/* Two Column Layout */
+.plans-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Schedule Column - Left */
+.schedule-column {
+  display: flex;
+  align-items: flex-start;
+}
+
+.schedule-card {
+  background: linear-gradient(135deg, #181028 0%, #270f31 50%, #600b56 100%);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  color: #fff;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.schedule-card h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.schedule-card p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.schedule-img {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+}
+
+.btn-schedule {
+  width: 100%;
+  background: #111111;
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-schedule:hover {
+  transform: translateY(-3px);
+}
+
+.btn-schedule .button-reservation {
+  display: block;
+  padding: 16px 20px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* Wizard Column - Right */
+.wizard-column {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 0;
+  background: linear-gradient(135deg, #181028 0%, #270f31 50%, #181028 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+.wizard-content {
+  background: transparent;
+  border-radius: 0;
+  padding: 45px;
+  color: #fff;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wizard-content h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.wizard-content .wizard-subtitle {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 35px;
+  line-height: 1.6;
+}
+
+/* Wizard Sidebar Inline */
+.wizard-sidebar-inline {
+  background: transparent;
+  border-radius: 0;
+  padding: 45px 30px;
+  position: relative;
+  overflow: hidden;
+  height: auto;
+}
+
+.wizard-sidebar-inline::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #600b56 0%, #efa238 100%);
+}
+
+/* Project Type Cards Grid */
+.project-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.project-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 25px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.project-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.project-card.active {
+  background: rgba(239, 162, 56, 0.15);
+  border-color: #efa238;
+}
+
+.project-card.active::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background: #efa238;
+  border-radius: 50%;
+}
+
+.project-card-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card-icon svg {
+  width: 40px;
+  height: 40px;
+  stroke: #fff;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.project-card h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+}
+
+/* Wizard Navigation */
+.wizard-nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-next-step {
+  flex: 1;
+  max-width: 200px;
+  padding: 15px 30px;
+  background: #111111;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-next-step:hover {
+
+  transform: translateY(-2px);
+}
+
+/* Wizard Sidebar */
+.wizard-sidebar {
+  width: 300px;
+  background: linear-gradient(180deg, #181028 0%, #270f31 100%);
+  border-radius: 20px;
+  padding: 40px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wizard-sidebar::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #600b56 0%, #efa238 100%);
+}
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 18px 0;
+  position: relative;
+}
+
+.step-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 48px;
+  bottom: -18px;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.step-item.active .step-number {
+  background: linear-gradient(135deg, #600b56, #efa238);
+  border-color: #efa238;
+  color: #fff;
+}
+
+.step-item.completed .step-number {
+  background: #efa238;
+  border-color: #efa238;
+  color: #181028;
+}
+
+.step-content h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 5px 0;
+}
+
+.step-content p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.step-item.active .step-content h5 {
+  color: #efa238;
+}
+
+/* Plan Details Section */
+.plan-details-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 30px;
+  margin-top: 30px;
+}
+
+.plan-price-display {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.plan-price-display .price-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.plan-price-display .price-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #efa238;
+}
+
+.plan-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.plan-features-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plan-features-grid li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.plan-features-grid li::before {
+  content: '✓';
+  color: #efa238;
+  font-weight: bold;
+  font-size: 14px;
+  min-width: 16px;
+}
+
+/* Sub-plans Toggle */
+.subplan-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.subplan-btn {
+  flex: 1;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.subplan-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.subplan-btn.active {
+  background: linear-gradient(to right, #600b56 0%, #efa238 100%);
+  border-color: transparent;
+}
+
+/* Action Buttons */
+.wizard-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn-pay-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 30px;
+  background: #111111;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-pay-card:hover {
+  background: #222;
+  transform: translateY(-2px);
+}
+
+.btn-pay-card:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-transfer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-transfer:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Bank Details Card */
+.bank-details-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 20px;
+  color: #333;
+}
+
+.bank-details-card p {
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.bank-details-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bank-details-card li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.bank-details-card li:last-child {
+  border-bottom: none;
+}
+
+/* Form Styles in Wizard */
+.wizard-form {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 20px;
+}
+
+.wizard-form input,
+.wizard-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.wizard-form input::placeholder,
+.wizard-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.wizard-form input:focus,
+.wizard-form textarea:focus {
+  outline: none;
+  border-color: #efa238;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.wizard-form .btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(to right, #600b56, #efa238);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wizard-form .btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(239, 162, 56, 0.3);
+}
+
+/* Alert Messages */
+.wizard-alert {
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.wizard-alert.success {
+  background: rgba(76, 175, 80, 0.2);
+  border: 1px solid rgba(76, 175, 80, 0.5);
+  color: #a5d6a7;
+}
+
+.wizard-alert.warning {
+  background: rgba(255, 152, 0, 0.2);
+  border: 1px solid rgba(255, 152, 0, 0.5);
+  color: #ffcc80;
+}
+
+/* Responsive Styles for Wizard */
+@media screen and (max-width: 1024px) {
+  .plans-two-columns {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .schedule-column {
+    order: 2;
+  }
+
+  .schedule-card {
+    position: relative;
+    top: 0;
+  }
+
+  .wizard-column {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .wizard-sidebar-inline {
+    order: -1;
+  }
+
+  .wizard-sidebar-inline .step-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .wizard-sidebar-inline .step-item {
+    flex: 0 0 auto;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+  }
+
+  .wizard-sidebar-inline .step-item:not(:last-child)::after {
+    display: none;
+  }
+
+  .wizard-sidebar-inline .step-content p {
+    display: none;
+  }
+
+  .wizard-sidebar-inline::before {
+    display: none;
+  }
+
+  .wizard-container {
+    flex-direction: column;
+  }
+
+  .wizard-sidebar {
+    width: 100%;
+    order: -1;
+  }
+
+  .step-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .step-item {
+    flex: 0 0 auto;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+  }
+
+  .step-item:not(:last-child)::after {
+    display: none;
+  }
+
+  .step-content p {
+    display: none;
+  }
+
+  .wizard-sidebar::before {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wizard-main {
+    padding: 30px 20px;
+  }
+
+  .wizard-main h2 {
+    font-size: 24px;
+  }
+
+  .project-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .project-card {
+    padding: 20px 15px;
+  }
+
+  .project-card h4 {
+    font-size: 12px;
+  }
+
+  .plan-features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wizard-sidebar {
+    padding: 20px 15px;
+  }
+
+  .step-item {
+    padding: 8px 12px;
+  }
+
+  .step-number {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    font-size: 12px;
+  }
+
+  .step-content h5 {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .project-cards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-card-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .project-card-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .subplan-buttons {
+    flex-direction: column;
+  }
+
+  .wizard-action-buttons {
+    gap: 10px;
+  }
+}
